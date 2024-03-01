@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../controller/education_controller.dart';
 import '../../model/education.dart';
+
 class EducationPreviewPage extends StatefulWidget {
   const EducationPreviewPage({Key? key}) : super(key: key);
 
@@ -10,18 +11,16 @@ class EducationPreviewPage extends StatefulWidget {
 }
 
 class _EducationPreviewPageState extends State<EducationPreviewPage> {
-  late Future<List<EducationModel>> _educationList;
-
   @override
   void initState() {
     super.initState();
-    _educationList = Provider.of<EducationProvider>(context, listen: false).loadEducationList();
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<EducationModel>>(
-      future: _educationList,
+      future: Provider.of<EducationProvider>(context, listen: false)
+          .loadEducationList(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
@@ -67,4 +66,3 @@ class _EducationPreviewPageState extends State<EducationPreviewPage> {
     );
   }
 }
-

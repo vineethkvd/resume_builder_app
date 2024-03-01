@@ -12,18 +12,16 @@ class LanguagePreviewPage extends StatefulWidget {
 }
 
 class _LanguagePreviewPageState extends State<LanguagePreviewPage> {
-  late Future<List<Language>> _languageList;
 
   @override
   void initState() {
     super.initState();
-    _languageList = Provider.of<LanguageProvider>(context, listen: false).loadLanguageList();
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Language>>(
-      future: _languageList,
+      future: Provider.of<LanguageProvider>(context, listen: false).loadLanguageList(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(

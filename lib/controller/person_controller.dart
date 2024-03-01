@@ -10,11 +10,11 @@ class PersonProvider extends ChangeNotifier {
   static const String _prefsKey = 'personList';
 
   void submitPersonDetails(Person person) {
-    try{
+    try {
       personList.add(person);
       notifyListeners();
       print("added");
-    }catch(e){
+    } catch (e) {
       print("fails");
     }
   }
@@ -22,10 +22,11 @@ class PersonProvider extends ChangeNotifier {
   Future<void> savePersonList() async {
     try {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
-      final String encodedList = jsonEncode(personList.map((e) => e.toJson()).toList());
+      final String encodedList =
+          jsonEncode(personList.map((e) => e.toJson()).toList());
       await prefs.setString(_prefsKey, encodedList);
       print("added shared preference");
-    } catch(e) {
+    } catch (e) {
       print("fail to add in shared preference $e");
     }
   }
@@ -36,11 +37,11 @@ class PersonProvider extends ChangeNotifier {
     if (encodedList != null) {
       final List<dynamic> decodedList = jsonDecode(encodedList);
       List<Person> savedPersonList =
-      decodedList.map((e) => Person.fromJson(e)).toList();
+          decodedList.map((e) => Person.fromJson(e)).toList();
       notifyListeners();
       return savedPersonList;
     }
-
+    notifyListeners();
     return [];
   }
 }
