@@ -5,6 +5,7 @@ import 'package:resume_builder_app/view/person_detail_apge.dart';
 import 'package:resume_builder_app/view/preview_page.dart';
 import 'package:resume_builder_app/view/skill_detail_page.dart';
 import 'package:resume_builder_app/view/widget/education_preview_page.dart';
+import 'package:resume_builder_app/view/widget/personal_preview_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -153,7 +154,7 @@ class _HomePageState extends State<HomePage> {
               InkWell(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => PreviewPage(),
+                    builder: (context) => PersonalPreviewPage(),
                   ));
                 },
                 child: Row(
