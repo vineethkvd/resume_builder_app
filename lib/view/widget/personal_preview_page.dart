@@ -38,32 +38,34 @@ class _PersonalPreviewPageState extends State<PersonalPreviewPage> {
           final List<Person> personList = snapshot.data!;
           // Now you have the education list, you can display it however you want
           return Card(
-            child: ListView.builder(
-              itemCount: personList.length,
-              itemBuilder: (context, index) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(2.0),
-                      child: Text('Name: ${personList[index].name}'),
-                    ),
-                    Row(children: [ Padding(
-                      padding: const EdgeInsets.all(2.0),
-                      child: Text('Address: ${personList[index].address}'),
-                    )],),
-                    Row(children: [ Padding(
-                      padding: const EdgeInsets.all(2.0),
-                      child: Text('Email: ${personList[index].email}'),
-                    )],),
-                    Row(children: [ Padding(
-                      padding: const EdgeInsets.all(2.0),
-                      child: Text('Phone: ${personList[index].phone}'),
-                    )],),
-                  ],
-                );
-              },
+            child: Expanded(
+              child: ListView.builder(
+                itemCount: personList.length,
+                itemBuilder: (context, index) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Text('Name: ${personList[index].name}'),
+                      ),
+                      Row(children: [ Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Text('Address: ${personList[index].address}'),
+                      )],),
+                      Row(children: [ Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Text('Email: ${personList[index].email}'),
+                      )],),
+                      Row(children: [ Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Text('Phone: ${personList[index].phone}'),
+                      )],),
+                    ],
+                  );
+                },
+              ),
             ),
           );
         }

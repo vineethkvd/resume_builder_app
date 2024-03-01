@@ -4,7 +4,6 @@ import 'package:resume_builder_app/controller/language_controller.dart';
 import 'package:resume_builder_app/model/language.dart';
 import '../../controller/education_controller.dart';
 import '../../model/education.dart';
-
 class LanguagePreviewPage extends StatefulWidget {
   const LanguagePreviewPage({Key? key}) : super(key: key);
 
@@ -13,16 +12,18 @@ class LanguagePreviewPage extends StatefulWidget {
 }
 
 class _LanguagePreviewPageState extends State<LanguagePreviewPage> {
+  late Future<List<Language>> _languageList;
+
   @override
   void initState() {
     super.initState();
+    _languageList = Provider.of<LanguageProvider>(context, listen: false).loadLanguageList();
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Language>>(
-      future: Provider.of<LanguageProvider>(context, listen: false)
-          .loadLanguageList(),
+      future: _languageList,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
@@ -34,30 +35,29 @@ class _LanguagePreviewPageState extends State<LanguagePreviewPage> {
           );
         } else {
           final List<Language> langList = snapshot.data!;
-          // Now you have the education list, you can display it however you want
-          return Card(
-            child: ListView.builder(
-              itemCount: langList.length,
-              itemBuilder: (context, index) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(2.0),
-                      child: Text('Name of language: ${langList[index].name}'),
-                    ),
-                    Row(children: [ Padding(
-                      padding: const EdgeInsets.all(2.0),
-                      child: Text('Proficiency: ${langList[index].proficiency}'),
-                    ),SizedBox(width: 10,)],),
-                  ],
-                );
-              },
-            ),
+          return ListView.builder(
+            itemCount: langList.length,
+            itemBuilder: (context, index) {
+              final language = langList[index];
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: Text('Name of language: ${language.name}'),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: Text('Proficiency: ${language.proficiency}'),
+                  ),
+                ],
+              );
+            },
           );
         }
       },
     );
   }
 }
+

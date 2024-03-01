@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:resume_builder_app/controller/education_controller.dart';
+import 'package:resume_builder_app/controller/language_controller.dart';
 import 'package:resume_builder_app/controller/person_controller.dart';
+import 'package:resume_builder_app/controller/skill_controller.dart';
 import 'package:resume_builder_app/view/home_page.dart';
 
 void main() {
@@ -21,6 +23,12 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => PersonProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => LanguageProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => SkillProvider(),
         ),
       ],
       child: MaterialApp(home: HomePage()),
